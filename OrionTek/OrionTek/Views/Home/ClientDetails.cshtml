@@ -1,0 +1,433 @@
+﻿
+@{
+    Layout = null;
+}
+@using OrionTek.Models;
+
+@Html.Partial("NavBar")
+
+<!-- Page wrapper  -->
+<!-- ============================================================== -->
+<div class="page-wrapper">
+    <!-- ============================================================== -->
+    <!-- Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-md-6 col-4 align-self-center">
+                <h3 class="page-title mb-0 p-0">Profile</h3>
+                <div class="d-flex align-items-center">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="@Url.Action("Clients", "Home")">Clients</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Profile</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+            <div class="col-md-5 col-4 align-self-center">
+                <div class="text-end upgrade-btn">
+                    <a onclick="location.href='@Url.Action("CreateClientAddress", "Home")?ID=' + @Model.ID"
+                       class="btn btn-success d-none d-md-inline-block text-white" target="">
+                        New
+                        Address
+                    </a>
+                </div>
+
+            </div>
+            <div class="col-sm-1 col-4 align-self-center">
+                <div class="text-start upgrade-btn">
+                    <a id="deleteClient"
+                       class="btn btn-danger d-none d-md-inline-block text-white" target="">
+                        Delete
+                        Client
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Container fluid  -->
+    <!-- ============================================================== -->
+    <div class="container-fluid">
+        <!-- ============================================================== -->
+        <!-- Start Page Content -->
+        <!-- ============================================================== -->
+        <!-- Row -->
+        <div class="row">
+            <!-- Column -->
+            <div class="col-lg-4 col-xlg-3 col-md-5">
+                <div class="card">
+                    <div class="card-body profile-card">
+                        <center class="mt-4">
+                            <img src="~/Styles/assets/images/users/user.png"
+                                 class="rounded-circle" width="150" />
+                            <h4 class="card-title mt-2">@Model.Names</h4>
+                            <h6 class="card-subtitle">@Model.LastNames</h6>
+                            <div class="row justify-content-center">
+                                <div class="col-4">
+                                    <a href="javascript:void(0)" class="link">
+                                        <i class="icon-people" aria-hidden="true"></i>
+                                        <span class="font-normal">254</span>
+                                    </a>
+                                </div>
+                                <div class="col-4">
+                                    <a href="javascript:void(0)" class="link">
+                                        <i class="icon-picture" aria-hidden="true"></i>
+                                        <span class="font-normal">54</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </center>
+                    </div>
+                </div>
+            </div>
+            <!-- Column -->
+            <!-- Column -->
+            <div class="col-lg-8 col-xlg-9 col-md-7">
+                <div class="card">
+                    <div class="card-body">
+                        <form class="form-horizontal form-material mx-2">
+                            <div class="form-group">
+                                <label class="col-md-12 mb-0">Names</label>
+                                <div class="col-md-12">
+                                    <input type="text" id="Names" placeholder="@Model.Names"
+                                           class="form-control ps-0 form-control-line">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-12 mb-0">LastNames</label>
+                                <div class="col-md-12">
+                                    <input type="text" id="LastNames" placeholder="@Model.LastNames"
+                                           class="form-control ps-0 form-control-line">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="example-email" class="col-md-12">Email</label>
+                                <div class="col-md-12">
+                                    <input type="email" id="Email" placeholder="@Model.Email"
+                                           class="form-control ps-0 form-control-line" name="example-email">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-12 mb-0">Phone </label>
+                                <div class="col-md-12">
+                                    <input type="text" id="Phone" placeholder="@Model.Phone"
+                                           class="form-control ps-0 form-control-line">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-12 mb-0">BirthDay </label>
+                                <div class="col-md-12">
+                                    <input type="text" id="Birthday" placeholder="@Model.Birthday.ToString().Split(' ')[0]"
+                                           class="form-control ps-0 form-control-line">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-12 mb-0">Description</label>
+                                <div class="col-md-12">
+                                    <textarea rows="5" id="Description" class="form-control ps-0 form-control-line">@Model.Description</textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-12 d-flex">
+                                        <a id="updateClient"
+                                           class="btn btn-success mx-auto mx-md-0 text-white" target="">
+                                            update
+                                            Client
+                                        </a>
+
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- Column -->
+        </div>
+        <!-- Row -->
+        <!-- ============================================================== -->
+        <!-- End PAge Content -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Right sidebar -->
+        <!-- ============================================================== -->
+        <!-- .right-sidebar -->
+        <!-- ============================================================== -->
+        <!-- End Right sidebar -->
+        <!-- ============================================================== -->
+    </div>
+
+    <center style="margin-top: -80px;">
+        <h1 class="page-title mb-0 p-0">Addresses</h1>
+    </center>
+
+
+    <div class="container-fluid">
+
+        <div class="row">
+
+
+            @if (ViewBag.Addresses.Count == 0)
+            {
+                <center>
+                    <h3 class="page-title mb-0 p-0">No registered addressess</h3>
+                </center>
+            }
+
+            @{ foreach (var item in ViewBag.Addresses as ICollection<Address>)
+                {
+
+                    <!-- Column -->
+                    <div class="col-lg-6 col-xlg-6 col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <form class="form-horizontal form-material mx-2">
+                                    <div class="form-group">
+                                        <label class="col-md-12 mb-0">Address Line 1</label>
+                                        <div class="col-md-12">
+                                            <input type="text" placeholder="@item.Address1"
+                                                   class="form-control ps-0 form-control-line">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-12 mb-0">Address Line 1</label>
+                                        <div class="col-md-12">
+                                            <input type="text" placeholder="@item.Address2"
+                                                   class="form-control ps-0 form-control-line">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-12 mb-0">City </label>
+                                        <div class="col-md-12">
+                                            <input type="text" placeholder="@item.City"
+                                                   class="form-control ps-0 form-control-line">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-12 mb-0">Zip </label>
+                                        <div class="col-md-12">
+                                            <input type="text" placeholder="@item.Zip"
+                                                   class="form-control ps-0 form-control-line">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-12 mb-0">Country </label>
+                                        <div class="col-md-12">
+                                            <input type="text" placeholder="@item.Country"
+                                                   class="form-control ps-0 form-control-line">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-sm-12 d-flex">
+                                            <button type="button" class="btn btn-danger mx-auto mx-md-0 text-white deletebutton" data-deletebutton="@item.ID">
+                                                Delete
+                                                Address
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Column -->
+                }
+            }
+
+        </div>
+
+
+
+
+    </div>
+
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- End Container fluid  -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- footer -->
+    <!-- ============================================================== -->
+    <footer class="footer text-center">
+        © 2021 Monster Admin by <a href="https://www.wrappixel.com/">wrappixel.com</a>
+    </footer>
+    <!-- ============================================================== -->
+    <!-- End footer -->
+    <!-- ============================================================== -->
+</div>
+<!-- ============================================================== -->
+<!-- End Page wrapper  -->
+<!-- ============================================================== -->
+
+
+@Html.Partial("Footer")
+
+
+<script>
+
+
+    $(document).ready(function () {
+
+
+        var dd = document.getElementsByClassName('deletebutton');
+
+        Array.prototype.forEach.call(dd, function (element) {
+            element.addEventListener('click', function () {
+
+
+            var JsonData = {
+
+                "ID": element.dataset.deletebutton,
+                "ClientID": @Model.ID,
+                "Address2": ' ',
+                "City": ' ',
+                "Zip": ' ',
+                "Country": ' '
+
+
+            };
+
+                DeleteAddress(JsonData);
+
+            });
+        });
+
+        function DeleteAddress(JsonData) {
+
+            $.ajax({
+                type: 'POST',
+                url: "/Home/Delete_Address",
+                data: JSON.stringify(JsonData),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                beforeSend: function () {
+                },
+                complete: function () {
+                    $("#ModalLoading").modal('hide');
+                },
+                success: function (resultConfirm) {
+                    if (resultConfirm.result) {
+                        window.location = '@Url.Action("ClientDetails", "Home")?ID=' + JsonData.ClientID;
+                    } else {
+                        swal("Upps!", "Something went wrong!", "error").then(function () {
+                            location.reload();
+                        });
+
+
+                    }
+                }
+            });
+
+        };
+
+
+        $("#deleteClient").click(function () {
+
+
+            var JsonData = {
+
+                "ID": @Model.ID,
+                "Names": '',
+                "LastNames": ''
+
+
+            };
+            console.log(JsonData);
+            DeleteClient(JsonData);
+
+
+        });
+
+
+        function DeleteClient(JsonData) {
+
+            $.ajax({
+                type: 'POST',
+                url: "/Home/Delete_Client",
+                data: JSON.stringify(JsonData),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                beforeSend: function () {
+                },
+                complete: function () {
+                    $("#ModalLoading").modal('hide');
+                },
+                success: function (resultConfirm) {
+                    if (resultConfirm.result) {
+                        window.location = '@Url.Action("Clients", "Home")';
+                    } else {
+                        swal("Upps!", "Something went wrong!", "error").then(function () {
+                            location.reload();
+                        });
+
+
+                    }
+                }
+            });
+
+        };
+
+
+        $("#updateClient").click(function () {
+
+
+            var JsonData = {
+
+                "ID": @Model.ID,
+                "Names": $("#Names").val(),
+                "LastNames": $("#LastNames").val(),
+                "Email": $("#Email").val(),
+                "Phone": $("#Phone").val(),
+                "Birthday": $("#Birthday").val(),
+                "Description": $("#Description").val()
+
+            };
+            console.log(JsonData);
+            UpdateClient(JsonData);
+
+
+        });
+
+
+        function UpdateClient(JsonData) {
+
+            $.ajax({
+                type: 'POST',
+                url: "/Home/Update_Client",
+                data: JSON.stringify(JsonData),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                beforeSend: function () {
+                },
+                complete: function () {
+                    $("#ModalLoading").modal('hide');
+                },
+                success: function (resultConfirm) {
+                    if (resultConfirm.result) {
+                        window.location = '@Url.Action("ClientDetails", "Home")?ID=' + @Model.ID;
+                    } else {
+                        swal("Upps!", "Something went wrong!", "error").then(function () {
+                            location.reload();
+                        });
+
+
+                    }
+                }
+            });
+
+        };
+
+
+
+
+     });
+
+
+</script>

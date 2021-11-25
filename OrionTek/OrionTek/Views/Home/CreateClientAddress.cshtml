@@ -1,0 +1,195 @@
+﻿
+@{
+    Layout = null;
+}
+
+
+@Html.Partial("NavBar")
+
+<!-- Page wrapper  -->
+<!-- ============================================================== -->
+<div class="page-wrapper">
+    <!-- ============================================================== -->
+    <!-- Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <div class="page-breadcrumb">
+        <div class="row align-items-center">
+            <div class="col-md-6 col-8 align-self-center">
+                <h3 class="page-title mb-0 p-0">Profile</h3>
+                <div class="d-flex align-items-center">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="@Url.Action("Clients", "Home")">Clients</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Create Address</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Container fluid  -->
+    <!-- ============================================================== -->
+    <div class="container-fluid">
+        <!-- ============================================================== -->
+        <!-- Start Page Content -->
+        <!-- ============================================================== -->
+        <!-- Row -->
+        <div class="row">
+            <!-- Column -->
+            <div class="col-lg-12 col-xlg-10 col-md-9">
+                <div class="card">
+                    <div class="card-body">
+                        <form class="form-horizontal form-material mx-2">
+                            <div class="form-group">
+                                <label class="col-md-12 mb-0">Address1</label>
+                                <div class="col-md-12">
+                                    <input type="text" placeholder="" id="Address1"
+                                           class="form-control ps-0 form-control-line">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-12 mb-0">Address2</label>
+                                <div class="col-md-12">
+                                    <input type="text" placeholder="" id="Address2"
+                                           class="form-control ps-0 form-control-line">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-12 mb-0">City </label>
+                                <div class="col-md-12">
+                                    <input type="text" placeholder="" id="City"
+                                           class="form-control ps-0 form-control-line">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-12 mb-0">Zip </label>
+                                <div class="col-md-12">
+                                    <input type="text" placeholder="" id="Zip"
+                                           class="form-control ps-0 form-control-line">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-12 mb-0">Country </label>
+                                <div class="col-md-12">
+                                    <input type="text" placeholder="" id="Country"
+                                           class="form-control ps-0 form-control-line">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-12 d-flex">
+                                    <button type="submit" id="comfirmButton" class="btn btn-success mx-auto mx-md-0 text-white">
+                                        Create Address
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- Column -->
+        </div>
+        <!-- Row -->
+        <!-- ============================================================== -->
+        <!-- End PAge Content -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Right sidebar -->
+        <!-- ============================================================== -->
+        <!-- .right-sidebar -->
+        <!-- ============================================================== -->
+        <!-- End Right sidebar -->
+        <!-- ============================================================== -->
+    </div>
+</div>
+
+
+
+<!-- ============================================================== -->
+<!-- End Container fluid  -->
+<!-- ============================================================== -->
+<!-- ============================================================== -->
+<!-- footer -->
+<!-- ============================================================== -->
+<footer class="footer text-center">
+    © 2021 Monster Admin by <a href="https://www.wrappixel.com/">wrappixel.com</a>
+</footer>
+<!-- ============================================================== -->
+<!-- End footer -->
+<!-- ============================================================== -->
+<!-- ============================================================== -->
+<!-- End Page wrapper  -->
+<!-- ============================================================== -->
+
+
+@Html.Partial("Footer")
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+
+
+    $(document).ready(function () {
+
+
+        $("#comfirmButton").click(function () {
+
+
+            var JsonData = {
+
+                "ClientID": @Convert.ToInt32(ViewBag.ClientID),
+                "Address1": $("#Address1").val(),
+                "Address2": $("#Address2").val(),
+                "City": $("#City").val(),
+                "Zip": $("#Zip").val(),
+                "Country": $("#Country").val()
+
+
+            };
+            console.log(JsonData);
+            CreateClients(JsonData);
+
+
+        });
+
+
+        function CreateClients(JsonData) {
+            $.ajax({
+                type: 'POST',
+                url: "/Home/Create_ClientAdress",
+                data: JSON.stringify(JsonData),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                beforeSend: function () {
+                },
+                complete: function () {
+                    $("#ModalLoading").modal('hide');
+                },
+                success: function (resultConfirm) {
+                    if (resultConfirm.result) {
+                       // swal("Client Created", "Created succesfully!.", "success").then(function () {
+                           window.location = '@Url.Action("ClientDetails", "Home")?ID=' + JsonData.ClientID
+                       // });
+                    } else {
+                        swal("Upps!", "Something went wrong!", "error").then(function () {
+                            location.reload();
+                        });
+
+
+                    }
+                }
+            });
+
+        };
+
+
+
+
+    });
+
+
+</script>

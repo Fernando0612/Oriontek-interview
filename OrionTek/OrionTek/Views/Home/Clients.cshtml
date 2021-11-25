@@ -1,0 +1,117 @@
+﻿
+@{
+    Layout = null;
+}
+
+@Html.Partial("NavBar")
+
+<!-- Page wrapper  -->
+<!-- ============================================================== -->
+<div class="page-wrapper">
+    <!-- ============================================================== -->
+    <!-- Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <div class="page-breadcrumb">
+        <div class="row align-items-center">
+            <div class="col-md-6 col-8 align-self-center">
+                <h3 class="page-title mb-0 p-0">Dashboard</h3>
+                <div class="d-flex align-items-center">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Clients</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+            <div class="col-md-6 col-4 align-self-center">
+                <div class="text-end upgrade-btn">
+                    <a href="@Url.Action("CreateClients", "Home")"
+                       class="btn btn-success d-none d-md-inline-block text-white" target="">
+                        New
+                        Client
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    
+        <!-- ============================================================== -->
+        <!-- Table -->
+        <!-- ============================================================== -->
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-md-flex">
+                            <h4 class="card-title col-md-10 mb-md-0 mb-3 align-self-center">Recents Clients</h4>
+                            <div class="col-md-2 ms-auto">
+                                <select class="form-select shadow-none col-md-2 ml-auto">
+                                    <option selected>January</option>
+                                    <option value="1">February</option>
+                                    <option value="2">March</option>
+                                    <option value="3">April</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="table-responsive mt-5">
+                            <table class="table stylish-table no-wrap">
+                                <thead>
+                                    <tr>
+                                        <th class="border-top-0" colspan="2">Full Name</th>
+                                        <th class="border-top-0">Email</th>
+                                        <th class="border-top-0">Phone</th>
+                                        <th class="border-top-0">Birthday</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    @foreach (var item in Model)
+                                    {
+
+                                        <tr>
+                                            <td style="width:50px;"><span class="round">@item.Names[0]</span></td>
+                                            <td class="align-middle">
+                                                <h6>@item.Names</h6><small class="text-muted">@item.LastNames</small>
+                                            </td>
+                                            <td class="align-middle">@item.Email</td>
+                                            <td class="align-middle">@item.Phone</td>
+                                            <td class="align-middle">@item.Birthday.ToString().Split(' ')[0]</td>
+                                            <td class="align-middle"><button class="btn btn-secondary" onclick="location.href='@Url.Action("ClientDetails", "Home")?ID=' + @item.ID" >Editar</button></td>
+                                        </tr>
+
+                                    }
+
+                               </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================== -->
+        <!-- Table -->
+
+
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Container fluid  -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- footer -->
+    <!-- ============================================================== -->
+    <footer class="footer text-center">
+        © 2021 Monster Admin by <a href="https://www.wrappixel.com/">wrappixel.com</a>
+    </footer>
+    <!-- ============================================================== -->
+    <!-- End footer -->
+    <!-- ============================================================== -->
+</div>
+<!-- ============================================================== -->
+<!-- End Page wrapper  -->
+
+@Html.Partial("Footer")
